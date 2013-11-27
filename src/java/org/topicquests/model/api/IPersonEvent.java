@@ -81,11 +81,15 @@ public interface IPersonEvent extends INode {
 	 */
 	void setStartDate(Date startDate);
 	
+	Date getStartDate();
+	
 	/**
 	 * Same as <em>date of death</em> for persons
 	 * @param endDate
 	 */
 	void setEndDate(Date endDate);
+	
+	Date getEndDate();
 	
 	/**
 	 * <p>Same as <em>birth location</em> for persons</p>
@@ -94,12 +98,16 @@ public interface IPersonEvent extends INode {
 	 */
 	void setLocationOfOrginLocator(String locationLocator);
 	
+	String getLocationOfOriginLocator();
+	
 	/**
 	 * <p>Same as <em>birth location</em> for persons</p>
 	 * <p>This is used to simply give the location's name</p>
 	 * @param locationName
 	 */
 	void setLocationOfOriginName(String locationName);
+	
+	String getLocationOfOriginName();
 	
 	/**
 	 * Add a nickname

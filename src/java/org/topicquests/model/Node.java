@@ -18,6 +18,7 @@ package org.topicquests.model;
 import java.util.*;
 
 import org.json.simple.JSONObject;
+import org.nex.util.DateUtil;
 
 import org.topicquests.model.api.ICitation;
 import org.topicquests.model.api.IEventLegend;
@@ -175,19 +176,21 @@ public class Node implements
 		properties.put(ITopicQuestsOntology.CREATED_DATE_PROPERTY, date);
 	} */
 	public void setDate(Date date) {
-		properties.put(ITopicQuestsOntology.CREATED_DATE_PROPERTY, date);
+		properties.put(ITopicQuestsOntology.CREATED_DATE_PROPERTY, DateUtil.defaultTimestamp(date));
 	}
 
 	public void setLastEditDate(Date date) {
-		properties.put(ITopicQuestsOntology.LAST_EDIT_DATE_PROPERTY, date);
+		properties.put(ITopicQuestsOntology.LAST_EDIT_DATE_PROPERTY, DateUtil.defaultTimestamp(date));
 	}
 
 	
 	public Date getDate() {
-		return (Date)properties.get(ITopicQuestsOntology.CREATED_DATE_PROPERTY);
+		String dx = (String)properties.get(ITopicQuestsOntology.CREATED_DATE_PROPERTY);
+		return DateUtil.fromDefaultTimestamp(dx);
 	}
 	public Date getLastEditDate() {
-		return (Date)properties.get(ITopicQuestsOntology.CREATED_DATE_PROPERTY);
+		String dx = (String)properties.get(ITopicQuestsOntology.LAST_EDIT_DATE_PROPERTY);
+		return DateUtil.fromDefaultTimestamp(dx);
 	}
 
 	/* (non-Javadoc)
@@ -506,6 +509,7 @@ public class Node implements
 			//MUST TEST FOR DATES
 			if (key.equals(ITopicQuestsOntology.CREATED_DATE_PROPERTY) || 
 				key.equals(ITopicQuestsOntology.LAST_EDIT_DATE_PROPERTY)) {
+				//Theoretically speaking, we don't store Date objects here
 				if (value instanceof Date) {
 					Date d = (Date)(value); //
 					buf.append("    <"+IXMLFields.VALUE+"><![CDATA["+d.getTime()+"]]></"+IXMLFields.VALUE+">\n");
@@ -786,12 +790,22 @@ public class Node implements
 
 	@Override
 	public void setStartDate(Date startDate) {
-		properties.put(IEventLegend.STARTING_DATE_PROPERTY, startDate);
+		properties.put(IEventLegend.STARTING_DATE_PROPERTY, DateUtil.defaultTimestamp(startDate));
+	}
+	@Override
+	public Date getStartDate() {
+		String dx = (String)properties.get(IEventLegend.STARTING_DATE_PROPERTY);
+		return DateUtil.fromDefaultTimestamp(dx);
 	}
 
 	@Override
 	public void setEndDate(Date endDate) {
-		properties.put(IEventLegend.ENDING_DATE_PROPERTY, endDate);
+		properties.put(IEventLegend.ENDING_DATE_PROPERTY, DateUtil.defaultTimestamp(endDate));
+	}
+	@Override
+	public Date getEndDate() {
+		String dx = (String)properties.get(IEventLegend.ENDING_DATE_PROPERTY);
+		return DateUtil.fromDefaultTimestamp(dx);
 	}
 
 	@Override
@@ -802,6 +816,15 @@ public class Node implements
 	@Override
 	public void setLocationOfOriginName(String locationName) {
 		this.setProperty(IEventLegend.LOCATION_OF_ORIGIN_NAME_PROPERTY, locationName);
+	}
+	@Override
+	public String getLocationOfOriginLocator() {
+		return (String)getProperty(IEventLegend.LOCATION_OF_ORIGIN_SYMBOL_PROPERTY);
+	}
+
+	@Override
+	public String getLocationOfOriginName() {
+		return (String)getProperty(IEventLegend.LOCATION_OF_ORIGIN_NAME_PROPERTY);
 	}
 
 
@@ -908,6 +931,9 @@ public class Node implements
 	public String getSignature() {
 		return (String)properties.get(ITopicQuestsOntology.TUPLE_SIGNATURE_PROPERTY);
 	}
+
+
+
 
 
 }

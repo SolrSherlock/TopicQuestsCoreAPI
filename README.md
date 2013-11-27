@@ -6,6 +6,8 @@ Core topic map APIs which can support topic map projects of various kinds. These
 Status: *alpha*<br/>
 
 ## Update History ##
+20131126 Fixed bug in Node date handling, filled in some code.
+
 20131125 First commit
 
 ## ToDo ##
