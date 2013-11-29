@@ -13,21 +13,20 @@
  * See the License for the specific language governing permissions
  * and limitations under the License.
  */
-package test;
-
+package org.topicquests.model.api;
 
 /**
  * @author park
- * 
+ * <p>Based on the tinkerpop blueprints Predicate</p>
  */
-public class TestHarness {
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		System.out.println("Starting");
-		new SimpleDateTest();
-		System.out.println("Did");
-	}
+public interface IPredicate {
 
+	/**
+	 * Returns the truth of the test written against 
+	 * <code>first</code> and <code>second</code>
+	 * @param first
+	 * @param second
+	 * @return
+	 */
+	boolean evaluate(final Object first, final Object second);
 }

@@ -23,6 +23,7 @@ import org.nex.util.DateUtil;
 import org.topicquests.model.api.ICitation;
 import org.topicquests.model.api.IEventLegend;
 import org.topicquests.model.api.INode;
+import org.topicquests.model.api.INodeQuery;
 import org.topicquests.model.api.IPersonEvent;
 import org.topicquests.model.api.IPersonLegend;
 import org.topicquests.model.api.ITuple;
@@ -931,6 +932,7 @@ public class Node implements
 	public String getSignature() {
 		return (String)properties.get(ITopicQuestsOntology.TUPLE_SIGNATURE_PROPERTY);
 	}
+
 
 
 

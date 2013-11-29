@@ -25,6 +25,28 @@ import org.topicquests.common.api.IResult;
 public interface ITupleQuery {
 	
 	/**
+	 * <p>List all available {@link ITuple}s which are instances of <code>predType</code>
+	 * and have <code>obj</code> as either the subject or object</p>
+	 * @param predType
+	 * @param obj
+	 * @param start
+	 * @param count
+	 * @param credentials
+	 * @return
+	 */
+	IResult listTuplesByPredTypeAndObjectOrSubject(String predType, String obj, int start, int count, Set<String> credentials);
+	
+	/**
+	 * <p>List locators of all available {@link ITuple}s which have any of the <code>labels</code></p>
+	 * @param labels
+	 * @param start
+	 * @param count
+	 * @param credentials 
+	 * @return
+	 */
+	IResult listTuplesByLabel(String [] labels, int start, int count, Set<String> credentials);
+	
+	/**
 	 * 
 	 * @param subjectLocator
 	 * @param start

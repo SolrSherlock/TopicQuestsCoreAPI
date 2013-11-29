@@ -26,6 +26,7 @@ import org.topicquests.common.api.IResult;
  */
 public interface INode {
 
+	
 	/**
 	 * Do a single update event when changes have been made as compared to
 	 * individual updates. This method would update LastEditDate

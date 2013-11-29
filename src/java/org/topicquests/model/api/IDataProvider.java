@@ -45,6 +45,13 @@ public interface IDataProvider extends ITopicDataProvider {
 	   * @return
 	   */
   	  ITupleQuery getTupleQuery();
+  	  
+  	  /**
+  	   * Return an {@link INodeQuery} object for the given <code>node</code>
+  	   * @param node
+  	   * @return
+  	   */
+  	  INodeQuery getNodeQuery(INode node);
 	
 	  /**
 	   * Remove an {@link INode} from the internal cache
