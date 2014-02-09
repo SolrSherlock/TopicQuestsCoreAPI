@@ -23,6 +23,7 @@ import org.topicquests.common.api.ITopicQuestsOntology;
 import org.topicquests.model.api.IDataProvider;
 import org.topicquests.model.api.INode;
 import org.topicquests.model.api.INodeModel;
+import org.topicquests.model.api.ITicket;
 
 /**
  * @author park
@@ -31,7 +32,7 @@ import org.topicquests.model.api.INodeModel;
 public class BootstrapBase {
 	protected IDataProvider database;
 	protected INodeModel model;
-	protected Set<String>credentials;
+	protected ITicket credentials;
 
 	/**
 	 * 
@@ -39,8 +40,7 @@ public class BootstrapBase {
 	public BootstrapBase(IDataProvider db) {
 		database = db;
 		model = database.getNodeModel();
-		credentials = new HashSet<String>();
-		credentials.add("admin");
+		credentials = new TicketPojo(ITopicQuestsOntology.SYSTEM_USER);
 		System.out.println("BootstrapBase "+database+" "+model);
 	}
 
@@ -56,18 +56,11 @@ public class BootstrapBase {
 	 */
 	protected void makeInstanceNode(String type, String locator, String icon, String smallIcon, String label, String description, IResult result) {
 		System.out.println("MAKEINST "+type+" "+locator);
-		IResult temp =  model.newInstanceNode(locator, type, label, description, "en", 
+		
+		INode node =  model.newInstanceNode(locator, type, label, description, "en", 
 									 ITopicQuestsOntology.SYSTEM_USER, smallIcon, icon, false);
-		if (temp.hasError()) {
-			result.addErrorString(temp.getErrorString());
-			result.setResultObject(new Boolean(false));
-		}
-		INode node = (INode)temp.getResultObject();
-		temp = database.putNode(node);
-		if (temp.hasError()) {
-			result.addErrorString(temp.getErrorString());
-			result.setResultObject(new Boolean(false));
-		}		
+		IResult temp = database.putNode(node);
+		model.recycleNode(node);
 	}
 	
 	/**
@@ -83,17 +76,13 @@ public class BootstrapBase {
 	protected void makeSubclassNode(String type, String locator, String icon, String smallIcon, String label, String description, IResult result) {
 		System.out.println("MAKESUB "+type+" "+locator);
 		IResult temp =  null;
+		INode node;
 		if (type == null)
-			temp = model.newNode(locator, label, description, "en", ITopicQuestsOntology.SYSTEM_USER, 
+			node = model.newNode(locator, label, description, "en", ITopicQuestsOntology.SYSTEM_USER, 
 					smallIcon, icon, false);
 		else
-			temp = model.newSubclassNode(locator, type, label, description, "en", 
+			node = model.newSubclassNode(locator, type, label, description, "en", 
 					ITopicQuestsOntology.SYSTEM_USER, smallIcon, icon, false);
-		if (temp.hasError()) {
-			result.addErrorString(temp.getErrorString());
-			result.setResultObject(new Boolean(false));
-		}
-		INode node = (INode)temp.getResultObject();
 		temp = database.putNode(node);
 		if (temp.hasError()) {
 			result.addErrorString(temp.getErrorString());
@@ -102,5 +91,6 @@ public class BootstrapBase {
 			//TEMPORARY
 			throw new RuntimeException(temp.getErrorString());
 		}		
+		model.recycleNode(node);
 	}
 }

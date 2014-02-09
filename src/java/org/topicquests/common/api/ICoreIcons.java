@@ -52,6 +52,8 @@ public interface ICoreIcons {
 		SOLUTION_SM			= "/images/ibis/decision_sm.png",
 		PROJECT				= "/images/project.png",
 		PROJECT_SM			= "/images/project_sm.png",
+		ONTOLOGY			= "/images/ontology.png",
+		ONTOLOGY_SM			= "/images/ontology_sm.png",
 		PUBLICATION			= "/images/publication.png",
 		PUBLICATION_SM		= "/images/publication_sm.png",
 		LITERATURE_ANALYSIS	= "/images/literature-analysis.png",

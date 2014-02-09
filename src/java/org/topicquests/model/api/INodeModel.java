@@ -38,7 +38,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newNode(String locator,String label, String description, String lang, 
+	  INode newNode(String locator,String label, String description, String lang, 
 			  String userId, String smallImagePath, String largeImagePath, boolean isPrivate);
 	  
 	  /**
@@ -52,7 +52,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newNode(String label, String description, String lang, String userId, 
+	  INode newNode(String label, String description, String lang, String userId, 
 			  String smallImagePath, String largeImagePath, boolean isPrivate);
 	  
 	  /**
@@ -69,7 +69,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newSubclassNode(String locator,String superclassLocator,String label, 
+	  INode newSubclassNode(String locator,String superclassLocator,String label, 
 			  String description, String lang, String userId, String smallImagePath, 
 			  String largeImagePath, boolean isPrivate);
 	  
@@ -86,7 +86,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newSubclassNode(String superclassLocator,String label, String description, 
+	  INode newSubclassNode(String superclassLocator,String label, String description, 
 			  String lang, String userId, String smallImagePath, String largeImagePath, boolean isPrivate);
 	  
 	  /**
@@ -103,7 +103,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newInstanceNode(String locator,String typeLocator,String label, String description, 
+	  INode newInstanceNode(String locator,String typeLocator,String label, String description, 
 			  String lang, String userId, String smallImagePath, String largeImagePath, boolean isPrivate);
 	  
 	  /**
@@ -119,7 +119,7 @@ public interface INodeModel {
 	   * @param isPrivate
 	   * @return
 	   */
-	  IResult newInstanceNode(String typeLocator,String label, String description, String lang, 
+	  INode newInstanceNode(String typeLocator,String label, String description, String lang, 
 			  String userId, String smallImagePath, String largeImagePath, boolean isPrivate);
 
 	  
@@ -141,7 +141,7 @@ public interface INodeModel {
 	   * @return
 	   */
 	  IResult updateNode(String nodeLocator, String updatedLabel, String updatedDetails, String language, 
-			  String oldLabel, String oldDetails, String userId, boolean isLanguageAddition, Set<String> credentials);
+			  String oldLabel, String oldDetails, String userId, boolean isLanguageAddition, ITicket  credentials);
 	  	  
 	  /**
 	   * <p>Perform a single, surgical change to a particular <code>key</code> (field)</p>
@@ -273,7 +273,7 @@ public interface INodeModel {
 	   * @param userId
 	   * @return
 	   */
-	  Set<String> getDefaultCredentials(String userId);
+	  ITicket  getDefaultCredentials(String userId);
 	  
 	  /**
 	   * Utility method to create Solr date strings
@@ -281,5 +281,12 @@ public interface INodeModel {
 	   * @return
 	   */
 	  String dateToSolrDate(Date d);
+	  
+	  /**
+	   * Take the opportunity to create a <em>NodeFactory</em> inside
+	   * and recycle components
+	   * @param node
+	   */
+	  void recycleNode(INode node);
 
 }

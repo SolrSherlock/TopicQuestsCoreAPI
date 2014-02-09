@@ -18,7 +18,7 @@ package org.topicquests.model.api;
 import java.util.Map;
 
 import org.topicquests.common.api.IResult;
-import org.topicquests.model.Environment;
+import org.topicquests.model.api.IEnvironment;
 
 /**
  * @author park
@@ -30,7 +30,7 @@ public interface IMergeImplementation {
 	 * Initialize the engine
 	 * @param environment
 	 */
-	void init(Environment environment);
+	void init(IEnvironment environment);
 
 	
 	/**
@@ -47,12 +47,13 @@ public interface IMergeImplementation {
 	   * and both nodes must be removed as child nodes; the VirtualProxy always stands
 	   * for those nodes in that graph.</p>
 	   * @param sourceNodeLocator
-	   * @param targetNodeLocator
-	   * @param mergeData
-	   * @param mergeConfidence
-	   * @param userLocator
+	 * @param targetNodeLocator
+	 * @param mergeData
+	 * @param mergeConfidence
+	 * @param virtualizer TODO
+	 * @param userLocator
 	   * @return
 	   */
-	  IResult assertMerge(String sourceNodeLocator, String targetNodeLocator, Map<String, Double> mergeData, double mergeConfidence, String userLocator);
+	  IResult assertMerge(String sourceNodeLocator, String targetNodeLocator, Map<String, Double> mergeData, double mergeConfidence, IVirtualizer virtualizer, String userLocator);
 	
 }

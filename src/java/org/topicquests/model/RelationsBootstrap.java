@@ -20,6 +20,7 @@ import org.topicquests.common.api.ICoreIcons;
 import org.topicquests.common.api.IRelationsLegend;
 import org.topicquests.common.api.IBootstrap;
 import org.topicquests.common.api.IResult;
+import org.topicquests.common.api.ISocialLegend;
 import org.topicquests.common.api.ITopicQuestsOntology;
 import org.topicquests.model.api.IDataProvider;
 
@@ -94,6 +95,13 @@ public class RelationsBootstrap extends BootstrapBase implements IBootstrap {
 		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.IS_METAPHOR_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Is Metaphor Relation Type", "The TopicQuests Relations typology is metaphor relation type: A is metaphor for B.", result);
 		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.IS_SIMILAR_TO_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Is Similar To Relation Type", "The TopicQuests Relations typology is similar to relation type: A is similar to B.", result);
 		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.SHARES_ISSUES_WITH_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Shares Issues With Relation Type", "The TopicQuests Relations typology shares issues with relation type: A shares issues with to B.", result);
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.BOOMARK_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Bookmark Relation Type", "The TopicQuests bookmark relation type: A is bookmarked by B.", result);
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.TAG_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Tag Relation Type", "The TopicQuests tag relation type: A is tagged by B.", result);
+
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.IS_RELATED_TO_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Is Related To Relation Type", "The TopicQuests tag relation type: A is related to B.", result);
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.IS_PART_OF_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Is Part Of Relation Type", "The TopicQuests tag relation type: A is part of B.", result);
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.IS_CONTAINED_IN_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Is Contained In Relation Type", "The TopicQuests tag relation type: A is contained in B.", result);
+		makeSubclassNode(ITopicQuestsOntology.RELATION_TYPE,IRelationsLegend.HAS_ROLE_RELATION_TYPE,ICoreIcons.RELATION_ICON_SM,ICoreIcons.RELATION_ICON,"Has Role Relation Type", "The TopicQuests tag relation type: A has role B.", result);
 
 		//ROLES
 		makeSubclassNode(ITopicQuestsOntology.ROLE_TYPE,IRelationsLegend.IDEA_ROLE_TYPE,ICoreIcons.CLASS_ICON_SM,ICoreIcons.CLASS_ICON,"Idea Role Type", "The TopicQuests Relations typology idea role type.", result);

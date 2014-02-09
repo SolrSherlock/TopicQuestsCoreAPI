@@ -36,7 +36,10 @@ public interface INodeTypes {
 	 	SOLUTION_TYPE			= "SolutionNodeType",
 	 	POSITION_TYPE			= "PositionNodeType",
 	 	CONVERSATION_MAP_TYPE	= "ConversationMapNodeType",
+	 	ONTOLOGY_NODE_TYPE		= "OntologyNodeType",
+	 	GRAPH_NODE_TYPE			= "GraphNodeType",
 	 	//entities
+	 	CITATION_NODE_TYPE		= "CitationNodeType",
 	 	ESSAY_TYPE				= "EssayNodeType",
 	 	ORGANIZATION_TYPE 		= "OrganizationNodeType",
 	 	PROJECT_TYPE			= "ProjectNodeType",
@@ -45,4 +48,5 @@ public interface INodeTypes {
 	 	SUMMARY_TYPE			= "SummaryNodeType",
 	 	PERSPECTIVE_TYPE		= "PerspectiveNodeType",
 	 	BOOKMARK_TYPE			= "BookmarkNodeType";
+	
 }

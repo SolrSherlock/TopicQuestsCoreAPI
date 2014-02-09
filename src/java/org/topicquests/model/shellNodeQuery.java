@@ -25,6 +25,7 @@ import org.topicquests.model.api.INodeQuery;
 import org.topicquests.model.api.IPredicate;
 import org.topicquests.model.api.ITuple;
 import org.topicquests.model.api.ITupleQuery;
+import org.topicquests.model.api.ITicket;
 import org.topicquests.util.LoggingPlatform;
 
 /**
@@ -60,7 +61,7 @@ public class shellNodeQuery implements INodeQuery {
 	 * @see org.topicquests.model.api.INodeQuery#tuples()
 	 */
 	@Override
-	public IResult tuples(Set<String> credentials) {
+	public IResult tuples(ITicket  credentials) {
 		IResult result = new ResultPojo();
 		if (!isFiltered) {
 			IResult r = executeQuery(credentials);
@@ -72,7 +73,7 @@ public class shellNodeQuery implements INodeQuery {
 		return result;
 	}
 	
-	private IResult executeQuery(Set<String> credentials) {
+	private IResult executeQuery(ITicket  credentials) {
 		IResult result = new ResultPojo();
 		filteredTuples = new ArrayList<ITuple>();
 		if (foundTuples != null && !foundTuples.isEmpty() && !hasContainers.isEmpty()) {
@@ -108,7 +109,7 @@ public class shellNodeQuery implements INodeQuery {
 	 * @see org.topicquests.model.api.INodeQuery#nodes()
 	 */
 	@Override
-	public IResult nodes(Set<String> credentials) {
+	public IResult nodes(ITicket  credentials) {
 		IResult result = new ResultPojo();
 		if (!isFiltered) {
 			IResult r = executeQuery(credentials);
@@ -159,7 +160,7 @@ public class shellNodeQuery implements INodeQuery {
 	 * @see org.topicquests.model.api.INodeQuery#nodeLocators()
 	 */
 	@Override
-	public IResult nodeLocators(Set<String> credentials) {
+	public IResult nodeLocators(ITicket  credentials) {
 		IResult result = new ResultPojo();
 		if (foundTuples == null)
 			result.addErrorString("No tuples found in this query");
@@ -254,7 +255,7 @@ public class shellNodeQuery implements INodeQuery {
 
 	@Override
 	public INodeQuery setRelationType(String relationType, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}

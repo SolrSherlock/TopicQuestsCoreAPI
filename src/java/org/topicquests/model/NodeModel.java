@@ -26,6 +26,7 @@ import org.topicquests.model.api.IMergeImplementation;
 import org.topicquests.model.api.INode;
 import org.topicquests.model.api.INodeModel;
 import org.topicquests.model.api.ITuple;
+import org.topicquests.model.api.ITicket;
 import org.topicquests.util.LoggingPlatform;
 
 /**
@@ -36,28 +37,43 @@ public class NodeModel implements INodeModel {
 	private LoggingPlatform log = LoggingPlatform.getLiveInstance();
 	private IDataProvider database;
 	private IMergeImplementation merger;
+	private Stack<INode>nodeStack;
+	private int maxNumNodes = 100;
 
 	/**
 	 * 
 	 */
-	public NodeModel(IDataProvider db, IMergeImplementation m) {
+	public NodeModel(IDataProvider db, IMergeImplementation m, int stackSize) {
 		database = db;
 		merger = m;
+		nodeStack = new Stack<INode>();
+		maxNumNodes = stackSize;
 		if (merger != null)
 			merger.setNodeModel(this);
 	}
 
+	private INode getNode() {
+		synchronized(nodeStack) {
+			INode result = null;
+			if (nodeStack.isEmpty())
+				result = new Node();
+			else
+				result = nodeStack.pop();
+			return result;
+		}
+	}
+	
 	/* (non-Javadoc)
 	 * @see org.topicquests.model.api.INodeModel#newNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newNode(String locator, String label, String description,
+	public INode newNode(String locator, String label, String description,
 			String lang, String userId, String smallImagePath,
 			String largeImagePath, boolean isPrivate) {
-		INode n = new Node();
+		INode n = getNode();
 		System.out.println("NodeModel.newNode- "+locator);
-		IResult result = new ResultPojo();
-		result.setResultObject(n);
+		//IResult result = new ResultPojo();
+		//result.setResultObject(n);
 		n.setLocator(locator);
 		n.setCreatorId(userId);
 		Date d = new Date();
@@ -74,16 +90,16 @@ public class NodeModel implements INodeModel {
 			n.addDetails(description, lang, userId, false);
 		n.setIsPrivate(isPrivate);
 		System.out.println("NodeModel.newNode+ "+locator);		
-		return result;	}
+		return n;	}
 
 	/* (non-Javadoc)
 	 * @see org.topicquests.model.api.INodeModel#newNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newNode(String label, String description, String lang,
+	public INode newNode(String label, String description, String lang,
 			String userId, String smallImagePath, String largeImagePath,
 			boolean isPrivate) {
-		IResult result = newNode(database.getUUID(),label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
+		INode result = newNode(database.getUUID(),label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
 		return result;
 	}
 
@@ -91,12 +107,11 @@ public class NodeModel implements INodeModel {
 	 * @see org.topicquests.model.api.INodeModel#newSubclassNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newSubclassNode(String locator, String superclassLocator,
+	public INode newSubclassNode(String locator, String superclassLocator,
 			String label, String description, String lang, String userId,
 			String smallImagePath, String largeImagePath, boolean isPrivate) {
-		IResult result = newNode(locator,label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
-		INode n = (INode)result.getResultObject();
-		n.addSuperclassId(superclassLocator);
+		INode result = newNode(locator,label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
+		result.addSuperclassId(superclassLocator);
 		return result;
 	}
 
@@ -104,12 +119,11 @@ public class NodeModel implements INodeModel {
 	 * @see org.topicquests.model.api.INodeModel#newSubclassNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newSubclassNode(String superclassLocator, String label,
+	public INode newSubclassNode(String superclassLocator, String label,
 			String description, String lang, String userId,
 			String smallImagePath, String largeImagePath, boolean isPrivate) {
-		IResult result = newNode(label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
-		INode n = (INode)result.getResultObject();
-		n.addSuperclassId(superclassLocator);
+		INode result = newNode(label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
+		result.addSuperclassId(superclassLocator);
 		return result;
 	}
 
@@ -117,12 +131,11 @@ public class NodeModel implements INodeModel {
 	 * @see org.topicquests.model.api.INodeModel#newInstanceNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newInstanceNode(String locator, String typeLocator,
+	public INode newInstanceNode(String locator, String typeLocator,
 			String label, String description, String lang, String userId,
 			String smallImagePath, String largeImagePath, boolean isPrivate) {
-		IResult result = newNode(locator,label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
-		INode n = (INode)result.getResultObject();
-		n.setNodeType(typeLocator);
+		INode result = newNode(locator,label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
+		result.setNodeType(typeLocator);
 		return result;
 	}
 
@@ -130,12 +143,11 @@ public class NodeModel implements INodeModel {
 	 * @see org.topicquests.model.api.INodeModel#newInstanceNode(java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, boolean)
 	 */
 	@Override
-	public IResult newInstanceNode(String typeLocator, String label,
+	public INode newInstanceNode(String typeLocator, String label,
 			String description, String lang, String userId,
 			String smallImagePath, String largeImagePath, boolean isPrivate) {
-		IResult result = newNode(label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
-		INode n = (INode)result.getResultObject();
-		n.setNodeType(typeLocator);
+		INode result = newNode(label,description,lang,userId,smallImagePath,largeImagePath,isPrivate);
+		result.setNodeType(typeLocator);
 		return result;
 	}
 
@@ -146,7 +158,7 @@ public class NodeModel implements INodeModel {
 	public IResult updateNode(String nodeLocator, String updatedLabel,
 			String updatedDetails, String language, String oldLabel,
 			String oldDetails, String userId, boolean isLanguageAddition,
-			Set<String> credentials) {
+			ITicket  credentials) {
 		IResult result = database.getNode(nodeLocator, credentials);
 		if (result.getResultObject() != null) {
 			INode n = (INode)result.getResultObject();
@@ -227,7 +239,7 @@ public class NodeModel implements INodeModel {
 			String userId, String smallImagePath, String largeImagePath,
 			boolean isTransclude, boolean isPrivate) {
 		IResult result = new ResultPojo();
-		Set<String> credentials = getDefaultCredentials(userId);
+		ITicket  credentials = getDefaultCredentials(userId);
 		//fetch the source actor node
 		IResult x = database.getNode(sourceNodeLocator, credentials);
 		INode nxA = (INode)x.getResultObject();
@@ -260,7 +272,7 @@ public class NodeModel implements INodeModel {
 		IResult result = new ResultPojo();
 		String signature = sourceNode.getLocator()+relationTypeLocator+targetNode.getLocator();
 		ITuple t = (ITuple)this.newInstanceNode(relationTypeLocator, relationTypeLocator, 
-				sourceNode.getLocator()+" "+relationTypeLocator+" "+targetNode.getLocator(), "en", userId, smallImagePath, largeImagePath, isPrivate).getResultObject();
+				sourceNode.getLocator()+" "+relationTypeLocator+" "+targetNode.getLocator(), "en", userId, smallImagePath, largeImagePath, isPrivate);
 		t.setIsTransclude(isTransclude);
 		t.setObject(targetNode.getLocator());
 		t.setObjectType(ITopicQuestsOntology.NODE_TYPE);
@@ -299,7 +311,7 @@ public class NodeModel implements INodeModel {
 		IResult result = new ResultPojo();
 		String signature = sourceNode.getLocator()+relationTypeLocator+targetNode.getLocator();
 		ITuple t = (ITuple)this.newInstanceNode(relationTypeLocator, relationTypeLocator, 
-				sourceNode.getLocator()+" "+relationTypeLocator+" "+targetNode.getLocator(), "en", userId, smallImagePath, largeImagePath, isPrivate).getResultObject();
+				sourceNode.getLocator()+" "+relationTypeLocator+" "+targetNode.getLocator(), "en", userId, smallImagePath, largeImagePath, isPrivate);
 		t.setIsTransclude(isTransclude);
 		t.setObject(targetNode.getLocator());
 		t.setObjectType(ITopicQuestsOntology.NODE_TYPE);
@@ -377,9 +389,8 @@ public class NodeModel implements INodeModel {
 	 * @see org.topicquests.model.api.INodeModel#getDefaultCredentials(java.lang.String)
 	 */
 	@Override
-	public Set<String> getDefaultCredentials(String userId) {
-		Set<String>result = new HashSet<String>();
-		result.add(userId);
+	public ITicket  getDefaultCredentials(String userId) {
+		ITicket result = new TicketPojo (userId);
 		return result;
 	}
 
@@ -406,6 +417,19 @@ public class NodeModel implements INodeModel {
 			result.add((String)o);
 		}
 		return result;
+	}
+
+	@Override
+	public void recycleNode(INode node) {
+		synchronized(nodeStack) {
+			if (nodeStack.size() >= this.maxNumNodes)
+				node = null;
+			else {
+				node.getProperties().clear();
+				nodeStack.push(node);
+			}
+		}
+		
 	}
 
 }

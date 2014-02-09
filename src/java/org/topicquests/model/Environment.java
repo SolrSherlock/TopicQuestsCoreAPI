@@ -15,10 +15,12 @@
  */
 package org.topicquests.model;
 
+import java.util.List;
 import java.util.Map;
 
 import org.nex.config.ConfigPullParser;
 import org.topicquests.model.api.IDataProvider;
+import org.topicquests.model.api.IEnvironment;
 import org.topicquests.model.api.IMergeImplementation;
 import org.topicquests.model.api.IQueryModel;
 import org.topicquests.util.LoggingPlatform;
@@ -28,7 +30,7 @@ import org.topicquests.util.Tracer;
  * @author park
  *
  */
-public class Environment {
+public class Environment implements IEnvironment {
 	public LoggingPlatform log = LoggingPlatform.getInstance("logger.properties");
 	private Map<String,Object>props;
 	public IDataProvider database;
@@ -109,38 +111,52 @@ public class Environment {
 		rbs.bootstrap();
 	}
 	
+	@Override
 	public IDataProvider getDataProvider() {
 		return database;
 	}
 		
+	@Override
 	public Map<String,Object> getProperties() {
 		return props;
 	}
 	
+	@Override
 	public String getStringProperty(String key) {
 		return (String)props.get(key);
 	}
 	
+	@Override
+	public List<List<String>> getListProperty(String key) {
+		return (List<List<String>>)props.get(key);
+	}
+
+	@Override
 	public void shutDown() {
 		//
 	}
 
 	/////////////////////////////
 	// Utilities
+	@Override
 	public void logDebug(String msg) {
 		log.logDebug(msg);
 	}
 	
+	@Override
 	public void logError(String msg, Exception e) {
 		log.logError(msg,e);
 	}
 	
+	@Override
 	public void record(String msg) {
 		log.record(msg);
 	}
 
+	@Override
 	public Tracer getTracer(String name) {
 		return log.getTracer(name);
 	}
+
 
 }

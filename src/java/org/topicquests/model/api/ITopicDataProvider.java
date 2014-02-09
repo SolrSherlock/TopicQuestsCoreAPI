@@ -41,7 +41,7 @@ public interface ITopicDataProvider {
 	   * @return
 	   * @deprecated   WILL NOT SCALE -- not implemented
 	   */
-	  IResult exportXmlFile(Writer out, Set<String> credentials);
+	  IResult exportXmlFile(Writer out, ITicket credentials);
 	  
 	  /**
 	   * <p>Export a tree root and it's entire subtree.</p>
@@ -60,7 +60,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult exportXmlTreeFile(String treeRootLocator, Writer out, Set<String> credentials);
+	  IResult exportXmlTreeFile(String treeRootLocator, Writer out, ITicket credentials);
 	
 	  /**
 	   * <p>Fetch a node. <code>credentials</code> are required in case
@@ -73,7 +73,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult getNode(String locator, Set<String> credentials);
+	  IResult getNode(String locator, ITicket credentials);
 	  
 	  /**
 	   * Assemble a node view based on the node and its various related nodes
@@ -81,7 +81,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult getNodeView(String locator, Set<String>credentials);
+	  IResult getNodeView(String locator, ITicket credentials);
 	  
 	  /**
 	   * <p>Remove a node from the database</p>
@@ -113,7 +113,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult getVirtualNodeIfExists(String locator, Set<String>credentials);
+	  IResult getVirtualNodeIfExists(String locator, ITicket credentials);
 	  
 	  /**
 	   * Returns a Boolean <code>true if there exists an {@link ITuple} of 
@@ -133,7 +133,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult nodeIsA(String nodeLocator, String targetTypeLocator, Set<String> credentials);
+	  IResult nodeIsA(String nodeLocator, String targetTypeLocator, ITicket credentials);
 	  
 	  /**
 	   * <p>List nodes associated with <code>psi</code></p>
@@ -145,50 +145,55 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByPSI(String psi, int start, int count, Set<String> credentials);
+	  IResult listNodesByPSI(String psi, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * <p>List nodes by the combination of a <code>label</code> and <code>typeLocator</code></p>
-	   * <p>TODO: requires language parameter</p>
 	   * @param label
 	   * @param typeLocator
+	   * @param language
 	   * @param start
 	   * @param count
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByLabelAndType(String label, String typeLocator,int start, int count, Set<String> credentials);
+	  IResult listNodesByLabelAndType(String label, String typeLocator,String language, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * <p>List nodes by <code>label</code></p>
-	   * <p>TODO: requires language parameter</p>
+	   * @param lagel
+	   * @param language 
+	   * @param start
+	   * @param count
+	   * @param credentials
+	   * @return
 	   */
-	  IResult listNodesByLabel(String label,int start, int count, Set<String> credentials);
+	  IResult listNodesByLabel(String label,String language, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * <p>Return nodes with labels that are <em>like</em> <code>labelFragment</code></p>
 	   * <p>A <em>wildcard</em> is added before and after <code>labelFragment</code></p>
 	   * <p>Example: given the string "My favorite topic"; would be matched with My, favorite, or topic</p>
 	   * <p>Results are case sensitive</p>
-	   * <p>Note: requires language parameter</p>
 	   * @param labelFragment
+	   * @param language 
 	   * @param start
 	   * @param count
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByLabelLike(String labelFragment, int start, int count, Set<String> credentials);
+	  IResult listNodesByLabelLike(String labelFragment, String language, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * <p>Return nodes with details that are <em>like</em> <code>detailsFragment</code></p>
-	   * <p>Note: requires language parameter</p>
 	   * @param detailsFragment
+	   * @param language 
 	   * @param start
 	   * @param count
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByDetailsLike(String detailsFragment, int start, int count, Set<String> credentials);
+	  IResult listNodesByDetailsLike(String detailsFragment, String language, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * Answer a particular Solr query string
@@ -198,7 +203,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByQuery(String queryString,int start, int count, Set<String> credentials);
+	  IResult listNodesByQuery(String queryString,int start, int count, ITicket credentials);
 	  
 	  /**
 	   * Return nodes created by <code>creatorId</code>
@@ -208,7 +213,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByCreatorId(String creatorId, int start, int count, Set<String> credentials);
+	  IResult listNodesByCreatorId(String creatorId, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * Return nodes of type <code>typeLocator</code>
@@ -218,7 +223,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listNodesByType(String typeLocator,int start, int count, Set<String> credentials);
+	  IResult listNodesByType(String typeLocator,int start, int count, ITicket credentials);
 	  
 	  /**
 	   * List all {@link ITuple} objects with <code>signature</code>
@@ -228,7 +233,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listTuplesBySignature(String signature, int start, int count, Set<String>credentials);
+	  IResult listTuplesBySignature(String signature, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * Really, this is the same as <code>listNodesByType</code>
@@ -238,7 +243,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return a list of [@link INode} objects or <code>null</code>
 	   */
-	  IResult listInstanceNodes(String typeLocator, int start, int count, Set<String> credentials);
+	  IResult listInstanceNodes(String typeLocator, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * <p>List nodes by type, except if any nodes are merged, do not list them. All virtual nodes
@@ -249,7 +254,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listTrimmedInstanceNodes(String typeLocator, int start, int count, Set<String>credentials);
+	  IResult listTrimmedInstanceNodes(String typeLocator, int start, int count, ITicket credentials);
 	  
 	  /**
 	   * List nodes which are subclasses of <code>superclassLocator</code>
@@ -259,7 +264,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listSubclassNodes(String superclassLocator, int start, int count, Set<String> credentials);
+	  IResult listSubclassNodes(String superclassLocator, int start, int count, ITicket credentials);
 
 	  ////////////////////////////////////
 	  //Tuple support
@@ -278,7 +283,7 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return -- an IResult object that contains either an ITuple or an error message
 	   */
-	  IResult getTuple(String tupleLocator, Set<String> credentials);
+	  IResult getTuple(String tupleLocator, ITicket credentials);
 	  
 	  	  
 	  /**
@@ -302,6 +307,6 @@ public interface ITopicDataProvider {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult runQuery(String queryString, int start, int count, Set<String> credentials);
+	  IResult runQuery(String queryString, int start, int count, ITicket credentials);
 
 }

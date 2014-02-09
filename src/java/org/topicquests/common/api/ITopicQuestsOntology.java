@@ -146,6 +146,17 @@ public interface ITopicQuestsOntology {
 		    DEFINING_LEGEND_PROPERTY_TYPE 				= "DefiningLegendPropertyType", //later
 		    		
 		//    VERSION_PROPERTY_TYPE 						= "VersionPropertyType",
+		    // FOR ONTOLOGIES
+		    ONTOLOGY_OBJECT_PROPERTY_TYPE				= "OntologyObjectPropertyType",
+		    	ONTOLOGY_INVERSE_FUNDTIONAL_PROPERTY_TYPE	= "OntologyInverseFunctionalPropertyType",
+		    ONTOLOGY_FUNCTIONAL_PROPERTY_TYPE			= "OntologyFunctionalPropertyType",
+		    ONTOLOGY_DATATYPE_PROPERTY_TYPE				= "OntologyDatatypePropertyType",
+		    ONTOLOGY_ANNOTATION_PROPERTY_TYPE			= "OntologyAnnotationPropertyType",
+		    DOMAIN_PROPERTY_TYPE						= "DomainPropertyType",
+		    RANGE_PROPERTY_TYPE							= "RangePropertyType",
+		    EQUIVALENT_TO_PROPERTY_TYPE					= "EquivalentToPropertyType",
+		    INVERSE_OF_PROPERTY_TYPE					= "InverseOfPropertyType",
+		    //W
 		    
 		    /**
 		     * Field for SOLR 4

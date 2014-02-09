@@ -22,7 +22,7 @@ package org.topicquests.common.api;
 public interface IBiblioLegend {
 	//CLASSES
 	public static final String
-		CITATION_NODE_TYPE			= "CitationNodeType",
+		PUBLICATION_TYPE			= "PublicationType",
 		JOURNAL_PUBLICATION_TYPE	= "JournalPublicationType",
 		BOOK_PUBLICATION_TYPE		= "BookPublicationType",
 		BLOG_PUBLICATION_TYPE		= "BlogPublicationType",
@@ -34,7 +34,8 @@ public interface IBiblioLegend {
 		REPORT_PUBLICATION_TYPE		= "ReportPublicationType",
 		PATENT_PUBLICATION_TYPE		= "PatentPublicationType",
 		OTHER_PUBLICATION_TYPE		= "OtherPublicationType",
-		MICROBLOG_PUBLICATION_TYPE	= "MicroblogPublicationType";
+		MICROBLOG_PUBLICATION_TYPE	= "MicroblogPublicationType",
+		ONTOLOGY_PUBLICATION_TYPE	= "OntologyPublicationType";
 		
 	//PROPERTIES
 	//NOTE: Title goes in ITopicQuestsOntology.LABEL_PROPERTY

@@ -20,6 +20,7 @@ import java.util.Set;
 import org.topicquests.common.api.IResult;
 import org.topicquests.model.api.IDataProvider;
 import org.topicquests.model.api.IQueryIterator;
+import org.topicquests.model.api.ITicket;
 
 /**
  * @author park
@@ -31,7 +32,7 @@ public class QueryIterator implements IQueryIterator {
 	private String _query;
 	private int _count;
 	private int _cursor;
-	private Set<String>_credentials;
+	private ITicket _credentials;
 
 	/**
 	 * 
@@ -46,7 +47,7 @@ public class QueryIterator implements IQueryIterator {
 	 * @see org.topicquests.model.api.IQueryIterator#start(java.lang.String, int, java.util.Set)
 	 */
 	@Override
-	public void start(String queryString, int hitCount, Set<String> credentials) {
+	public void start(String queryString, int hitCount, ITicket  credentials) {
 		_query = queryString;
 		_count = hitCount;
 		_cursor = 0;

@@ -15,8 +15,7 @@
  */
 package org.topicquests.model;
 
-import java.util.Set;
-
+import org.topicquests.model.api.ITicket;
 import org.topicquests.common.api.IResult;
 import org.topicquests.common.api.ITopicQuestsOntology;
 import org.topicquests.model.api.IDataProvider;
@@ -45,7 +44,7 @@ public class shellTupleQuery implements ITupleQuery {
 	 */
 	@Override
 	public IResult listTuplesBySubject(String subjectLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.TUPLE_SUBJECT_PROPERTY+":"+subjectLocator;
 		//NOTE: we need to run this as an iterator
 		IResult result = database.runQuery(queryString,start, count, credentials);
@@ -57,7 +56,7 @@ public class shellTupleQuery implements ITupleQuery {
 	 */
 	@Override
 	public IResult listTuplesByObjectLocator(String objectLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.TUPLE_OBJECT_PROPERTY+":"+objectLocator;
 		//NOTE: we need to run this as an iterator
 		IResult result = database.runQuery(queryString,start, count, credentials);
@@ -69,7 +68,7 @@ public class shellTupleQuery implements ITupleQuery {
 	 */
 	@Override
 	public IResult listTuplesByPredTypeAndObject(String predType, String obj,
-			int start, int count, Set<String> credentials) {
+			int start, int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+predType+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_PROPERTY+":"+obj; // an object
 		//NOTE: we need to run this as an iterator
@@ -82,7 +81,7 @@ public class shellTupleQuery implements ITupleQuery {
 	 */
 	@Override
 	public IResult listTuplesBySubjectAndPredType(String subjectLocator,
-			String predType, int start, int count, Set<String> credentials) {
+			String predType, int start, int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.TUPLE_SUBJECT_PROPERTY+":"+subjectLocator+
 				" AND "+ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+predType;
 		//NOTE: we need to run this as an iterator
@@ -96,7 +95,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listSubjectNodesByObjectAndRelation(String objectLocator,
 			String relationLocator, int start, int count,
-			Set<String> credentials) {
+			ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+relationLocator+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_PROPERTY+":"+objectLocator; // an object
 		//NOTE: we need to run this as an iterator
@@ -111,7 +110,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listObjectNodesBySubjectAndRelation(String subjectLocator,
 			String relationLocator, int start, int count,
-			Set<String> credentials) {
+			ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+relationLocator+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_TYPE_PROPERTY+":"+ITopicQuestsOntology.NODE_TYPE+ //require only nodes, not literals
 				" AND "+ITopicQuestsOntology.TUPLE_SUBJECT_PROPERTY+":"+subjectLocator; // a subject
@@ -127,7 +126,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listObjectNodesBySubjectAndRelationAndScope(
 			String subjectLocator, String relationLocator, String scopeLocator,
-			int start, int count, Set<String> credentials) {
+			int start, int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+relationLocator+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_TYPE_PROPERTY+":"+ITopicQuestsOntology.NODE_TYPE+ //require only nodes, not literals
 				" AND "+ITopicQuestsOntology.TUPLE_SUBJECT_PROPERTY+":"+subjectLocator + // a subject
@@ -144,7 +143,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listSubjectNodesByObjectAndRelationAndScope(
 			String objectLocator, String relationLocator, String scopeLocator,
-			int start, int count, Set<String> credentials) {
+			int start, int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+relationLocator+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_PROPERTY+":"+objectLocator; // an object
 		//NOTE: we need to run this as an iterator
@@ -159,7 +158,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listSubjectNodesByRelationAndObjectRole(
 			String relationLocator, String objectRoleLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		String queryString = ITopicQuestsOntology.INSTANCE_OF_PROPERTY_TYPE+":"+relationLocator+ //the relation
 				" AND "+ITopicQuestsOntology.TUPLE_OBJECT_ROLE_PROPERTY+":"+objectRoleLocator; // an object
 		//NOTE: we need to run this as an iterator
@@ -174,7 +173,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listSubjectNodesByRelationAndSubjectRole(
 			String relationLocator, String subjectRoleLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -185,7 +184,7 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listObjectNodesByRelationAndSubjectRole(
 			String relationLocator, String subjectRoleLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -196,20 +195,20 @@ public class shellTupleQuery implements ITupleQuery {
 	@Override
 	public IResult listObjectNodesByRelationAndObjectRole(
 			String relationLocator, String objectRoleLocator, int start,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public IResult listTuplesByLabel(String[] labels, int start, int count, Set<String> credentials) {
+	public IResult listTuplesByLabel(String[] labels, int start, int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public IResult listTuplesByPredTypeAndObjectOrSubject(String predType,
-			String obj, int start, int count, Set<String> credentials) {
+			String obj, int start, int count, ITicket  credentials) {
 		// TODO Auto-generated method stub
 		return null;
 	}

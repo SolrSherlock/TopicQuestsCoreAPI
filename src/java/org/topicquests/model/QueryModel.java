@@ -15,11 +15,11 @@
  */
 package org.topicquests.model;
 
-import java.util.Set;
 
 import org.topicquests.common.api.ITopicQuestsOntology;
 import org.topicquests.model.api.IQueryIterator;
 import org.topicquests.model.api.IQueryModel;
+import org.topicquests.model.api.ITicket;
 import org.topicquests.common.QueryUtil;
 
 /**
@@ -45,7 +45,7 @@ public class QueryModel implements IQueryModel {
 	 */
 	@Override
 	public IQueryIterator listNodesByLabel(String label, String language,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		IQueryIterator itr = new QueryIterator(environment);
 		
 		itr.start(makeField(labelQuery,language)+":"+QueryUtil.escapeQueryCulprits(label), count, credentials);
@@ -57,7 +57,7 @@ public class QueryModel implements IQueryModel {
 	 */
 	@Override
 	public IQueryIterator listNodesByDetails(String details, String language,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		IQueryIterator itr = new QueryIterator(environment);
 		itr.start(makeField(detailsQuery,language)+":"+QueryUtil.escapeQueryCulprits(details), count, credentials);
 		return itr;
@@ -68,7 +68,7 @@ public class QueryModel implements IQueryModel {
 	 */
 	@Override
 	public IQueryIterator listTuplesByRelation(String relationType, int count,
-			Set<String> credentials) {
+			ITicket  credentials) {
 		IQueryIterator itr = new QueryIterator(environment);
 		itr.start(instanceQuery+relationType, count, credentials);
 		return itr;
@@ -79,7 +79,7 @@ public class QueryModel implements IQueryModel {
 	 */
 	@Override
 	public IQueryIterator listNodeInstances(String nodeTypeLocator, int count,
-			Set<String> credentials) {
+			ITicket  credentials) {
 		IQueryIterator itr = new QueryIterator(environment);
 		itr.start(instanceQuery+nodeTypeLocator, count, credentials);
 		return itr;
@@ -90,7 +90,7 @@ public class QueryModel implements IQueryModel {
 	 */
 	@Override
 	public IQueryIterator listNodeSubclasses(String superClassLocator,
-			int count, Set<String> credentials) {
+			int count, ITicket  credentials) {
 		IQueryIterator itr = new QueryIterator(environment);
 		itr.start(subClassQuery+superClassLocator, count, credentials);
 		return itr;

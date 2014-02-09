@@ -31,6 +31,7 @@ public interface IXMLFields {
 		VALUE			= "value",
 		DATABASE		= "database",
 		LOCATOR_ATT		= "locator",
-		KEY_ATT			= "key";
+		KEY_ATT			= "key",
+		LANGUAGE_ATT	= "language";
 
 }

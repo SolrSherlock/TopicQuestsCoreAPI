@@ -14,7 +14,6 @@
  * and limitations under the License.
  */
 package org.topicquests.model.api;
-import java.util.Set;
 
 import org.topicquests.common.api.IResult;
 
@@ -34,7 +33,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return
 	 */
-	IResult listTuplesByPredTypeAndObjectOrSubject(String predType, String obj, int start, int count, Set<String> credentials);
+	IResult listTuplesByPredTypeAndObjectOrSubject(String predType, String obj, int start, int count, ITicket credentials);
 	
 	/**
 	 * <p>List locators of all available {@link ITuple}s which have any of the <code>labels</code></p>
@@ -44,7 +43,7 @@ public interface ITupleQuery {
 	 * @param credentials 
 	 * @return
 	 */
-	IResult listTuplesByLabel(String [] labels, int start, int count, Set<String> credentials);
+	IResult listTuplesByLabel(String [] labels, int start, int count, ITicket credentials);
 	
 	/**
 	 * 
@@ -54,7 +53,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return
 	 */
-	IResult listTuplesBySubject(String subjectLocator, int start, int count, Set<String>credentials);
+	IResult listTuplesBySubject(String subjectLocator, int start, int count, ITicket credentials);
 
 	/**
 	 * For tuples where the object is a nodeLocator, list all of them
@@ -64,7 +63,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return
 	 */
-	IResult listTuplesByObjectLocator(String objectLocator, int start, int count, Set<String>credentials);
+	IResult listTuplesByObjectLocator(String objectLocator, int start, int count, ITicket credentials);
 	
 	
 	  /**
@@ -79,7 +78,7 @@ public interface ITupleQuery {
 	   * @param credentials
 	   * @return -- an IResult object that contains List[ITuple] or an error message
 	   */
-	  IResult listTuplesByPredTypeAndObject(String predType, String obj, int start, int count, Set<String> credentials);
+	  IResult listTuplesByPredTypeAndObject(String predType, String obj, int start, int count, ITicket credentials);
 	
 	  /**
 	   * <p>Return a list of <code>ITuple</code> objects inside an {@link IResult} object</p>
@@ -91,7 +90,7 @@ public interface ITupleQuery {
 	   * @param credentials
 	   * @return
 	   */
-	  IResult listTuplesBySubjectAndPredType(String subjectLocator, String predType, int start, int count, Set<String> credentials);
+	  IResult listTuplesBySubjectAndPredType(String subjectLocator, String predType, int start, int count, ITicket credentials);
 	/**
 	 * <p>Return a possibly empty list of {@link INode} objects which correspond
 	 * with <code>objectLocator</code> by relation <code>relationLocator</code></p>
@@ -102,7 +101,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return <code>List<INode></code>
 	 */
-	IResult listSubjectNodesByObjectAndRelation(String objectLocator, String relationLocator, int start, int count, Set<String>credentials);
+	IResult listSubjectNodesByObjectAndRelation(String objectLocator, String relationLocator, int start, int count, ITicket credentials);
 	
 	/**
 	 * <p>Return a possibly empty list of {@link INode} objects which correspond with
@@ -114,7 +113,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return <code>List<INode></code>
 	 */
-	IResult listObjectNodesBySubjectAndRelation(String subjectLocator, String relationLocator, int start, int count, Set<String>credentials);
+	IResult listObjectNodesBySubjectAndRelation(String subjectLocator, String relationLocator, int start, int count, ITicket credentials);
 	
 	
 	/**
@@ -127,7 +126,7 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return <code>List<INode></code>
 	 */
-	IResult listObjectNodesBySubjectAndRelationAndScope(String subjectLocator, String relationLocator, String scopeLocator, int start, int count, Set<String>credentials);
+	IResult listObjectNodesBySubjectAndRelationAndScope(String subjectLocator, String relationLocator, String scopeLocator, int start, int count, ITicket credentials);
 	
 	/**
 	 * <p>Return a possibly empty list of {@link INode} objects which correspond
@@ -139,14 +138,14 @@ public interface ITupleQuery {
 	 * @param credentials
 	 * @return <code>List<INode></code>
 	 */
-	IResult listSubjectNodesByObjectAndRelationAndScope(String objectLocator, String relationLocator, String scopeLocator, int start, int count, Set<String>credentials);
+	IResult listSubjectNodesByObjectAndRelationAndScope(String objectLocator, String relationLocator, String scopeLocator, int start, int count, ITicket credentials);
 	
-	IResult listSubjectNodesByRelationAndObjectRole(String relationLocator, String objectRoleLocator, int start, int count, Set<String>credentials);
+	IResult listSubjectNodesByRelationAndObjectRole(String relationLocator, String objectRoleLocator, int start, int count, ITicket credentials);
 	
-	IResult listSubjectNodesByRelationAndSubjectRole(String relationLocator, String subjectRoleLocator, int start, int count, Set<String>credentials);
+	IResult listSubjectNodesByRelationAndSubjectRole(String relationLocator, String subjectRoleLocator, int start, int count, ITicket credentials);
 	
-	IResult listObjectNodesByRelationAndSubjectRole(String relationLocator, String subjectRoleLocator, int start, int count, Set<String>credentials);
+	IResult listObjectNodesByRelationAndSubjectRole(String relationLocator, String subjectRoleLocator, int start, int count, ITicket credentials);
 	
-	IResult listObjectNodesByRelationAndObjectRole(String relationLocator, String objectRoleLocator, int start, int count, Set<String>credentials);
+	IResult listObjectNodesByRelationAndObjectRole(String relationLocator, String objectRoleLocator, int start, int count, ITicket credentials);
 	//TODO fetching tuples which weight criteria
 }

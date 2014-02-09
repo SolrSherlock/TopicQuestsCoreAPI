@@ -53,6 +53,10 @@ public class Node implements
 		properties = new JSONObject();
 	}
 
+	public Node(JSONObject jo) {
+		properties = jo;
+	}
+	
 	/**
 	 * Constructor used when creating from a Solr hit
 	 * @param props 
@@ -335,7 +339,7 @@ public class Node implements
 	}
 	
 	public void addPSI(String psi) {
-		properties.put(ITopicQuestsOntology.PSI_PROPERTY_TYPE, psi);
+//		properties.put(ITopicQuestsOntology.PSI_PROPERTY_TYPE, psi);
 		List<String> ids = getMultivaluedProperty(ITopicQuestsOntology.PSI_PROPERTY_TYPE);
 		// no duplicates allowed
 		if (!ids.contains(psi))

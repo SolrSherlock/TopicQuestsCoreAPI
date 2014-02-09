@@ -35,10 +35,13 @@ public interface IHarvestingOntology {
 	 * Types
 	 */
 	public static final String
+			HARVEST_AGENT_USER			= "HarvestAgentUser",
 			/** overriding Cluster, based on a query */
 			CLUSTER_TYPE				= "ClusterType",
 			/** individual cluster node in a cluster, with weights and members */
 			CLUSTER_NODE_TYPE			= "ClusterNodeType",
+			/** cluster label as a tag */
+			CLUSTER_TAG_TYPE			= "ClusterTagType",
 			/** nodes created by carrot2 */
 			CARROT2_CLUSTERED_NODE_TYPE	= "Carrot2ClusteredNodeType",
 			/** Carrot2 as a user agent*/

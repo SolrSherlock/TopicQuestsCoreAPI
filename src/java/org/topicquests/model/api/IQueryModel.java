@@ -32,7 +32,7 @@ public interface IQueryModel {
 	 * @param credentials
 	 * @return
 	 */
-	IQueryIterator listNodesByLabel(String label, String language, int count, Set<String>credentials);
+	IQueryIterator listNodesByLabel(String label, String language, int count,ITicket credentials);
 	
 	/**
 	 * <p>Return an iterator which provides instances of {@link INode} which contain
@@ -43,7 +43,7 @@ public interface IQueryModel {
 	 * @param credentials
 	 * @return
 	 */
-	IQueryIterator listNodesByDetails(String details, String language, int count, Set<String> credentials);
+	IQueryIterator listNodesByDetails(String details, String language, int count,ITicket  credentials);
 	
 	/**
 	 * <p>Return an iterator which provides instances of {@link INode} which are
@@ -54,7 +54,7 @@ public interface IQueryModel {
 	 * @param credentials
 	 * @return
 	 */
-	IQueryIterator listTuplesByRelation(String relationType, int count, Set<String>credentials);
+	IQueryIterator listTuplesByRelation(String relationType, int count,ITicket credentials);
 	
 	/**
 	 * <p>Return an iterator which provides instances of {@link INode} which are instances of
@@ -64,7 +64,7 @@ public interface IQueryModel {
 	 * @param credentials
 	 * @return
 	 */
-	IQueryIterator listNodeInstances(String nodeTypeLocator, int count, Set<String>credentials);
+	IQueryIterator listNodeInstances(String nodeTypeLocator, int count,ITicket credentials);
 	
 	/**
 	 * <p>Return an iterator which provides instances of {@link INode} which are subclasses of
@@ -74,6 +74,6 @@ public interface IQueryModel {
 	 * @param credentials TODO
 	 * @return
 	 */
-	IQueryIterator listNodeSubclasses(String superClassLocator, int count, Set<String> credentials);
+	IQueryIterator listNodeSubclasses(String superClassLocator, int count,ITicket  credentials);
 	
 }

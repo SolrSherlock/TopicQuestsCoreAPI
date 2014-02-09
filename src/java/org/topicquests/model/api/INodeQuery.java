@@ -15,7 +15,7 @@
  */
 package org.topicquests.model.api;
 
-import java.util.Set;
+import org.topicquests.model.api.ITicket;
 
 import org.topicquests.common.api.IResult;
 
@@ -31,7 +31,7 @@ public interface INodeQuery {
 	 * @param credentials TODO
 	 * @return
 	 */
-	IResult tuples(Set<String> credentials);
+	IResult tuples(ITicket  credentials);
 	
 	/**
 	 * Returns a List<INode> of nodes in this query after
@@ -39,7 +39,7 @@ public interface INodeQuery {
 	 * @param credentials
 	 * @return
 	 */
-	IResult nodes(Set<String> credentials);
+	IResult nodes(ITicket  credentials);
 	
 	/**
 	 *<p> Returns an {@link INodeQuery2} object based on the relationType
@@ -51,7 +51,7 @@ public interface INodeQuery {
 	 * @param credentials
 	 * @return
 	 */
-	INodeQuery setRelationType(String relationType, int start, int count, Set<String> credentials);
+	INodeQuery setRelationType(String relationType, int start, int count, ITicket  credentials);
 	
 	/**
 	 * Returns a List<String> of {@link INode} locators at the opposite
@@ -59,7 +59,7 @@ public interface INodeQuery {
 	 * @param credentials TODO
 	 * @return
 	 */
-	IResult nodeLocators(Set<String> credentials);
+	IResult nodeLocators(ITicket  credentials);
 	
 	/**
 	 * Filter query based on found objects having a property 

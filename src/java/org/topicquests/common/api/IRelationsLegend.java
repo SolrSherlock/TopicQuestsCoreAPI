@@ -85,6 +85,15 @@ public interface IRelationsLegend {
   		SOLUTION_ROLE_TYPE 					= "SolutionRoleType",//
   		THEORY_ROLE_TYPE 					= "TheoryRoleType",//
   		//properties
-  		RELATION_WEIGHT						= "weight";
+  		RELATION_WEIGHT						= "RelationWeightPropertyType",
+  		
+		BOOMARK_RELATION_TYPE	= "BookmarkRelationType",
+		TAG_RELATION_TYPE		= "TagRelationType",
+		//more relations from looking at OBO ontologies
+		IS_RELATED_TO_RELATION_TYPE			= "IsRelatedToRelationType",
+		IS_PART_OF_RELATION_TYPE			= "IsPartOfRelationType",
+		IS_CONTAINED_IN_RELATION_TYPE		= "IsContainedInRelationType",
+		HAS_ROLE_RELATION_TYPE				= "HasRoleRelationType";
+
 
 }

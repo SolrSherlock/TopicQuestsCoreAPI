@@ -38,7 +38,7 @@ public interface IQueryIterator {
 	 * @param hitCount
 	 * @param credentials
 	 */
-	void start(String queryString, int hitCount, Set<String> credentials);
+	void start(String queryString, int hitCount, ITicket  credentials);
 	
 	/**
 	 * Set the cursor back to 0
