@@ -1,5 +1,6 @@
 TopicQuestsCoreAPI
 ==================
+**This project is replaced with [https://github.com/SolrSherlock/OpenSherlockCoreAPI](https://github.com/SolrSherlock/OpenSherlockCoreAPI "OpenSherlockCoreAPI")**
 
 Core topic map APIs which can support topic map projects of various kinds. These were abstracted away from the code in SolrPlatformCore to allow for other developments.
 
